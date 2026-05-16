@@ -1,0 +1,10 @@
+body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f6f7fb; color: #172033; }
+main { max-width: 1200px; margin: 0 auto; padding: 32px; }
+section { background: white; border: 1px solid #dfe4ef; border-radius: 12px; padding: 20px; margin: 18px 0; box-shadow: 0 2px 10px #00000008; }
+.notice { color: #8a4b00; background: #fff4df; border: 1px solid #ffd28a; padding: 12px; border-radius: 8px; }
+.settings { display: flex; gap: 12px; align-items: center; }
+input { padding: 9px 10px; border: 1px solid #cbd4e1; border-radius: 8px; }
+button { margin: 2px; padding: 8px 12px; border: 0; border-radius: 8px; background: #2559d6; color: white; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { border-bottom: 1px solid #edf0f5; padding: 10px; text-align: left; vertical-align: top; }
+pre { background: #101828; color: #d1fadf; padding: 16px; border-radius: 8px; overflow: auto; }
