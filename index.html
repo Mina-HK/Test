@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>暖暖英语 30 分钟学习</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <nav class="nav-wrap" aria-label="主导航">
+      <a class="brand" href="#dashboard" aria-label="回到首页">
+        <span class="brand-icon">☀️</span>
+        <span>暖暖英语</span>
+      </a>
+      <div class="nav-links">
+        <a href="#dashboard">首页</a>
+        <a href="#words">单词</a>
+        <a href="#grammar">语法</a>
+        <a href="#speaking">口语</a>
+        <a href="#checkin">打卡</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="dashboard" class="hero section-card">
+      <div class="hero-copy">
+        <p class="eyebrow">每天 30 分钟 · 从零开始也可以</p>
+        <h1>今天只学一点点，明天就会轻松一点。</h1>
+        <p class="hero-text">完成单词、语法、口语三个小任务，再点击打卡。页面会自动把进度保存在浏览器里。</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#words">开始今日学习</a>
+          <button class="ghost-btn" id="resetTodayBtn" type="button">重置今日进度</button>
+        </div>
+      </div>
+      <div class="progress-panel" aria-label="今日学习概览">
+        <div class="progress-ring" aria-live="polite">
+          <span id="progressNumber">0%</span>
+          <small>今日进度</small>
+        </div>
+        <div class="stats-grid">
+          <article>
+            <strong id="streakDays">0</strong>
+            <span>连续打卡</span>
+          </article>
+          <article>
+            <strong id="knownWords">0</strong>
+            <span>认识单词</span>
+          </article>
+          <article>
+            <strong id="reviewWords">0</strong>
+            <span>待复习</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card task-card" aria-labelledby="today-title">
+      <div class="section-heading">
+        <p class="eyebrow">Dashboard</p>
+        <h2 id="today-title">今日任务</h2>
+      </div>
+      <div class="task-list" id="taskList"></div>
+    </section>
+
+    <section id="words" class="section-card" aria-labelledby="words-title">
+      <div class="section-heading">
+        <p class="eyebrow">Vocabulary</p>
+        <h2 id="words-title">今日 10 个基础单词</h2>
+        <p>不用一次记住。先判断“认识 / 不认识”，不认识的会进入复习列表。</p>
+      </div>
+      <div class="word-grid" id="wordGrid"></div>
+    </section>
+
+    <section id="grammar" class="section-card" aria-labelledby="grammar-title">
+      <div class="section-heading">
+        <p class="eyebrow">Grammar</p>
+        <h2 id="grammar-title">语法小课堂</h2>
+        <p>用中文把基础语法讲简单，每天看懂一小块就够了。</p>
+      </div>
+      <div class="grammar-list" id="grammarList"></div>
+      <button class="ghost-btn complete-btn" id="grammarDoneBtn" type="button">我已读完语法</button>
+    </section>
+
+    <section id="speaking" class="section-card" aria-labelledby="speaking-title">
+      <div class="section-heading">
+        <p class="eyebrow">Speaking</p>
+        <h2 id="speaking-title">日常口语句子</h2>
+        <p>先读英文，再点击卡片看中文解释。可以跟读三遍。</p>
+      </div>
+      <div class="speaking-grid" id="speakingGrid"></div>
+    </section>
+
+    <section id="checkin" class="section-card checkin-card" aria-labelledby="checkin-title">
+      <div>
+        <p class="eyebrow">Check-in</p>
+        <h2 id="checkin-title">今日打卡</h2>
+        <p id="checkinHint">完成学习后，点击下面按钮记录今天的努力。</p>
+      </div>
+      <button class="primary-btn checkin-btn" id="checkinBtn" type="button">今日已完成</button>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>给零基础学习者的温暖提醒：慢慢来，重复比速度更重要。</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
