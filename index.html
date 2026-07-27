@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#173f35">
+  <title>Mina AI OS</title>
+  <style>
+    :root{--green:#173f35;--green2:#2f6657;--mint:#e8f1ed;--cream:#f8f5ec;--blue:#eef5f7;--ink:#18221f;--muted:#76807d;--line:#e8ece9;--white:#fff;--shadow:0 12px 34px rgba(24,56,47,.07);--r:22px}
+    *{box-sizing:border-box}body{margin:0;background:#f7f8f6;color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+    button,input,textarea,select{font:inherit}button{cursor:pointer}.app{min-height:100vh}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}
+    .brand{display:flex;align-items:center;gap:12px}.mark{width:38px;height:38px;border-radius:13px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800}.brand h1{font-size:17px;margin:0}.brand small{display:block;color:var(--muted)}
+    .top-actions{display:flex;gap:10px}.btn{border:0;border-radius:12px;padding:10px 14px;background:var(--mint);color:var(--green);font-weight:700}.btn.primary{background:var(--green);color:#fff}.btn.ghost{background:#fff;border:1px solid var(--line)}
+    .shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:calc(100vh - 72px)}.sidebar{background:#fff;border-right:1px solid var(--line);padding:24px 16px;position:sticky;top:72px;height:calc(100vh - 72px)}
+    .nav{display:grid;gap:7px}.nav button{border:0;background:transparent;border-radius:14px;padding:12px 14px;text-align:left;color:#59635f}.nav button.active{background:var(--mint);color:var(--green);font-weight:800}.nav .soon{opacity:.58}.sync{position:absolute;bottom:22px;left:18px;right:18px;padding:13px;border-radius:15px;background:var(--blue);color:#557076;font-size:12px}
+    main{padding:28px;max-width:1540px;width:100%;margin:auto}.page{display:none}.page.active{display:block}.page-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px}.page-head h2{font-size:25px;margin:0 0 4px}.page-head p{margin:0;color:var(--muted)}
+    .dashboard{display:grid;grid-template-columns:minmax(250px,.86fr) minmax(360px,1.35fr) minmax(270px,.95fr);gap:18px}.column{display:grid;gap:18px;align-content:start}.card{background:#fff;border:1px solid #edf0ee;border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}.card.cream{background:var(--cream)}.card.blue{background:var(--blue)}.card-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.card-title h3{font-size:16px;margin:0}.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--green2);font-weight:800}
+    .progress{height:7px;background:#e8ece9;border-radius:9px;overflow:hidden}.progress i{display:block;height:100%;background:var(--green2);width:42%}.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stat{padding:12px;border-radius:14px;background:#f7f9f7}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+    .task-list{display:grid;gap:10px}.task{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff;display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:start}.check{width:20px;height:20px;border-radius:7px;border:1.5px solid #aec0b9;background:#fff}.task.done{opacity:.55}.task.done .check{background:var(--green);color:#fff}.task.done .task-name{text-decoration:line-through}.task-name{font-weight:750}.meta{color:var(--muted);font-size:12px;margin-top:3px}.tag{display:inline-block;border-radius:99px;padding:3px 8px;background:var(--mint);color:var(--green);font-size:11px;font-weight:700}.tag.warm{background:#faeadf;color:#a95832}.tag.blue{background:#e7f0f5;color:#476b7b}.why{margin-top:8px;padding:8px 10px;background:#f8faf8;border-radius:10px;color:#57625e;font-size:12px}
+    .hero{background:linear-gradient(135deg,#173f35,#2f6657);color:#fff}.hero .eyebrow{color:#bcd3ca}.hero h3{font-size:21px;margin:4px 0 7px}.hero p{color:#d7e4df;margin:0}.hero .btn{margin-top:16px;background:#fff;color:var(--green)}
+    .mini-list{display:grid;gap:11px}.mini{display:flex;gap:11px;align-items:flex-start}.dot{width:9px;height:9px;border-radius:50%;background:#e19b6b;margin-top:6px;flex:none}.mini b{display:block}.mini span{color:var(--muted);font-size:12px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.filters button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 12px;color:var(--muted)}.filters button.active{background:var(--green);color:#fff;border-color:var(--green)}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px}
+    .idea-grid,.habit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.idea{padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}.idea h3{font-size:16px;margin:10px 0 7px}.idea p{color:var(--muted);min-height:44px}.idea-actions{display:flex;gap:8px}.idea-actions .btn{padding:8px 10px;font-size:12px}
+    .capture{display:grid;grid-template-columns:1fr auto;gap:10px}.capture input,.capture textarea{border:1px solid var(--line);border-radius:13px;padding:12px 14px;outline:none;background:#fbfcfb}.capture input:focus,.capture textarea:focus{border-color:#7da293}.memo-list{display:grid;gap:12px;margin-top:18px}.memo{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px}.memo p{margin:0 0 10px}.memo-actions{display:flex;gap:8px}.habit{padding:20px;border-radius:18px;background:#fff;border:1px solid var(--line);text-align:center}.habit .icon{font-size:25px}.habit h3{margin:8px 0 3px}.habit .streak{color:var(--muted);font-size:12px}.habit button{margin-top:12px;width:100%}.habit.checked{background:var(--mint);border-color:#cbded6}
+    .mobile-menu,.bottom-nav{display:none}.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#183d33;color:#fff;padding:11px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:1100px){.dashboard{grid-template-columns:1fr 1.2fr}.dashboard .column:last-child{grid-column:1/-1;grid-template-columns:1fr 1fr}.idea-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:760px){body{padding-bottom:78px}.topbar{height:62px;padding:0 16px}.brand small,.top-actions .ghost{display:none}.shell{display:block;min-height:auto}.sidebar{display:none}main{padding:18px 14px}.page-head{align-items:center}.page-head h2{font-size:22px}.page-head p{font-size:12px}.dashboard,.workspace{display:grid;grid-template-columns:1fr}.dashboard .column:last-child{grid-column:auto;display:grid;grid-template-columns:1fr}.dashboard .column:nth-child(1){order:2}.dashboard .column:nth-child(2){order:1}.dashboard .column:nth-child(3){order:3}.idea-grid,.habit-grid{grid-template-columns:1fr}.card{padding:17px;border-radius:19px}.mobile-menu{display:grid;place-items:center;border:0;background:#f1f5f2;width:38px;height:38px;border-radius:12px}.bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;bottom:0;left:0;right:0;padding:7px 5px calc(7px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);z-index:30}.bottom-nav button{border:0;background:transparent;color:#7b8581;font-size:10px}.bottom-nav b{font-size:19px;display:block;line-height:1.2}.bottom-nav button.active{color:var(--green);font-weight:800}.drawer{display:none;position:fixed;inset:62px 0 0;background:rgba(19,35,29,.28);z-index:40}.drawer.open{display:block}.drawer-panel{width:82%;max-width:320px;height:100%;background:#fff;padding:20px;box-shadow:10px 0 30px rgba(0,0,0,.12)}.drawer-panel .nav button{width:100%}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="mark">M</div><div><h1>Mina AI OS</h1><small>你的个人 AI COO 工作台</small></div></div>
+    <div class="top-actions"><button class="btn ghost" data-action="quick">＋ 快速记录</button><button class="btn primary" data-page="today">今日总控</button><button class="mobile-menu" id="menuBtn">☰</button></div>
+  </header>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="nav" id="desktopNav"></div>
+      <div class="sync">☁️ 演示数据模式<br>Google Sheets 尚未连接</div>
+    </aside>
+    <main>
+      <section class="page active" id="today">
+        <div class="page-head"><div><h2>早上好，Mina</h2><p>今天只推进最重要的事。7 天内可能收款的动作优先。</p></div><span class="tag">7月28日 · 周二</span></div>
+        <div class="dashboard">
+          <div class="column">
+            <div class="card"><div class="card-title"><h3>每日计划</h3><span class="eyebrow">2 / 5</span></div><div class="progress"><i></i></div><div class="task-list" id="planList"></div></div>
+            <div class="card blue"><div class="card-title"><h3>打卡状态</h3><button class="btn" data-page="habits">去打卡</button></div><div class="statrow"><div class="stat"><b>3</b><span>连续早起</span></div><div class="stat"><b>5</b><span>客户跟进</span></div><div class="stat"><b>2</b><span>内容发布</span></div></div></div>
+          </div>
+          <div class="column">
+            <div class="card hero"><div class="eyebrow">AI 今日判断</div><h3>先收款，再扩张</h3><p>Sarita 的追加订单已到可付款节点；完成后再处理新项目，避免资源继续分散。</p><button class="btn" data-page="tasks">查看 5 项核心任务 →</button></div>
+            <div class="card"><div class="card-title"><h3>今日核心任务</h3><span class="tag">最多 5 项</span></div><div class="task-list" id="coreTasks"></div></div>
+            <div class="card cream"><div class="card-title"><h3>收入机会</h3><span class="eyebrow">未来 7 天</span></div><div class="statrow"><div class="stat"><b>$762</b><span>待收款</span></div><div class="stat"><b>$210</b><span>待确认</span></div><div class="stat"><b>68%</b><span>综合概率</span></div></div></div>
+          </div>
+          <div class="column">
+            <div class="card"><div class="card-title"><h3>等待回复</h3><span class="tag warm">3 项</span></div><div class="mini-list"><div class="mini"><i class="dot"></i><div><b>Sarita · 追加订单</b><span>等待 TT 付款凭证 · 今天跟进</span></div></div><div class="mini"><i class="dot"></i><div><b>Modibo · ABB 报价</b><span>已超过 3 天未推进</span></div></div><div class="mini"><i class="dot"></i><div><b>幼稚园 K1 查询</b><span>等待学校确认学位</span></div></div></div></div>
+            <div class="card blue"><div class="card-title"><h3>今日灵感</h3><button class="btn" data-page="ideas">查看全部</button></div><b>“正品旅行装到底能不能补充？”</b><p class="meta">把高频咨询做成 20 秒演示短视频，同时承接闲鱼搜索流量。</p></div>
+            <div class="card"><div class="card-title"><h3>快速备忘</h3><button class="btn" data-action="quick">＋ 新建</button></div><p class="meta">记录后可一键转为任务或选题，不让想法停在备忘录。</p></div>
+          </div>
+        </div>
+      </section>
+      <section class="page" id="tasks">
+        <div class="page-head"><div><h2>任务中心</h2><p>所有任务都有下一步、截止时间和入选原因。</p></div><button class="btn primary" data-action="addTask">＋ 新任务</button></div>
+        <div class="filters" id="taskFilters"><button class="active" data-filter="all">全部</button><button data-filter="收入">收入</button><button data-filter="香港落地">香港落地</button><button data-filter="内容">内容</button><button data-filter="求职">求职</button></div>
+        <div class="workspace"><div class="card"><div class="task-list" id="allTasks"></div></div><div class="card cream"><div class="eyebrow">AI 排序规则</div><h3>为什么是这 5 项？</h3><p>7 天内可能收款 ＞ 现有客户复购 ＞ 已报价客户 ＞ 香港求职 ＞ 新客户开发。</p><p class="meta">硬性证件、住房与学位截止日期会自动提升优先级。</p></div></div>
+      </section>
+      <section class="page" id="ideas">
+        <div class="page-head"><div><h2>选题每日灵感</h2><p>从真实咨询和业务目标出发，点击即可转制作任务。</p></div><button class="btn primary" data-action="addIdea">＋ 记录灵感</button></div>
+        <div class="idea-grid" id="ideaGrid"></div>
+      </section>
+      <section class="page" id="memos">
+        <div class="page-head"><div><h2>备忘录</h2><p>先捕获，再转成可执行事项。</p></div></div>
+        <div class="card"><div class="capture"><input id="memoInput" placeholder="输入一个想法、提醒或临时记录…"><button class="btn primary" id="saveMemo">保存备忘</button></div><div class="memo-list" id="memoList"></div></div>
+      </section>
+      <section class="page" id="habits">
+        <div class="page-head"><div><h2>打卡记录</h2><p>保持关键习惯，数据用于生成日复盘。</p></div><span class="tag">今日 2 / 4</span></div>
+        <div class="habit-grid" id="habitGrid"></div>
+      </section>
+      <section class="page" id="records"><div class="page-head"><div><h2>记录</h2><p>集中查看备忘与打卡。</p></div></div><div class="card"><button class="btn" data-page="memos">打开备忘录</button> <button class="btn" data-page="habits">打开打卡</button></div></section>
+      <section class="page" id="profile"><div class="page-head"><div><h2>我的</h2><p>Mina AI OS V1 · 演示模式</p></div></div><div class="card"><h3>数据连接</h3><p>当前仅使用浏览器本地演示数据，没有连接或修改 Google Sheets。</p><span class="tag blue">待你验收后连接</span></div></section>
+    </main>
+  </div>
+</div>
+<div class="drawer" id="drawer"><div class="drawer-panel"><div class="brand" style="margin-bottom:22px"><div class="mark">M</div><h1>Mina AI OS</h1></div><div class="nav" id="drawerNav"></div></div></div>
+<nav class="bottom-nav"><button class="active" data-page="today"><b>⌂</b>今日</button><button data-page="tasks"><b>✓</b>任务</button><button data-page="ideas"><b>✦</b>灵感</button><button data-page="records"><b>▤</b>记录</button><button data-page="profile"><b>●</b>我的</button></nav>
+<div class="toast" id="toast"></div>
+<script>
+const nav=[["today","⌂ 今日总控"],["tasks","✓ 任务中心"],["ideas","✦ 选题每日灵感"],["memos","▤ 备忘录"],["habits","◉ 打卡记录"],["soon","— 后续模块：三个 CRM"],["soon","— 香港落地与求职"]];
+const tasks=[
+ {id:1,title:"确认 Sarita 追加订单付款",project:"收入",stage:"等待付款",next:"发送 TT 付款与提货条件说明",due:"今天 18:00",value:"USD 762",why:"7 天内最可能收款",done:false},
+ {id:2,title:"跟进 Modibo 的 ABB 报价",project:"收入",stage:"已报价",next:"用二选一问题确认采购时间",due:"今天",value:"USD 210",why:"已超过 3 天未推进",done:false},
+ {id:3,title:"致电九龙东幼稚园确认学位",project:"香港落地",stage:"学位确认",next:"按名单联系 3 所学校",due:"7月29日",value:"影响8月入住",why:"住房与学位是硬期限",done:false},
+ {id:4,title:"发布 Dior 补充香水演示短视频",project:"内容",stage:"待制作",next:"拍摄 20 秒填装步骤",due:"7月30日",value:"引流询盘",why:"来自真实高频咨询",done:true},
+ {id:5,title:"投递香港项目主任岗位",project:"求职",stage:"待投递",next:"按 JD 改写 3 条经历",due:"7月31日",value:"HKD 30k+",why:"匹配项目统筹经验",done:false}
+];
+const ideas=[
+ {tag:"Dior 香水",title:"10ml 旅行装用完后怎么补充？",desc:"用实拍演示回答高频咨询，结尾引导选择香型。",platform:"闲鱼 · 小红书"},
+ {tag:"外贸成交",title:"客户说下次一起付款，怎么推进？",desc:"拆解银行手续费、预付款和国内转账三个方案。",platform:"小红书 · LinkedIn"},
+ {tag:"香港生活",title:"四口之家如何筛选九龙东两房",desc:"把老人、幼儿、厨房和交通做成可复制评分表。",platform:"小红书"}
+];
+let memos=JSON.parse(localStorage.getItem("mina-memos")||'["问物业康华苑是否有雪柜","整理香水买家常问问题","周五复盘本周实际收款"]');
+let habits=[["🌤️","早起规划","连续 3 天",true],["💬","客户跟进","今日 2 位",true],["✍️","内容输出","今日未完成",false],["📝","日终复盘","21:30 提醒",false]];
+function navHtml(){return nav.map(([id,label])=>`<button ${id==="soon"?'class="soon"':`data-page="${id}"`}>${label}</button>`).join("")}
+desktopNav.innerHTML=drawerNav.innerHTML=navHtml();
+function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===id));drawer.classList.remove("open");window.scrollTo(0,0)}
+function taskHtml(t){return `<div class="task ${t.done?"done":""}" data-project="${t.project}"><button class="check" data-check="${t.id}">${t.done?"✓":""}</button><div><div><span class="tag">${t.project}</span> <span class="tag blue">${t.stage}</span></div><div class="task-name">${t.title}</div><div class="meta">下一步：${t.next} · 截止：${t.due}</div><div class="why">价值：${t.value}　｜　入选原因：${t.why}</div></div><span class="meta">${t.done?"已完成":"进行中"}</span></div>`}
+function renderTasks(){coreTasks.innerHTML=tasks.map(taskHtml).join("");planList.innerHTML=tasks.slice(0,3).map(taskHtml).join("");allTasks.innerHTML=tasks.map(taskHtml).join("")}
+function renderIdeas(){ideaGrid.innerHTML=ideas.map((x,i)=>`<article class="idea"><span class="tag">${x.tag}</span><h3>${x.title}</h3><p>${x.desc}</p><div class="meta" style="margin-bottom:12px">推荐平台：${x.platform}</div><div class="idea-actions"><button class="btn primary" data-make="${i}">转制作任务</button><button class="btn ghost" data-publish="${i}">标记已发布</button></div></article>`).join("")}
+function renderMemos(){memoList.innerHTML=memos.map((m,i)=>`<div class="memo"><p>${m}</p><div class="memo-actions"><button class="btn" data-memo-task="${i}">转任务</button><button class="btn" data-memo-idea="${i}">转选题</button></div></div>`).join("")}
+function renderHabits(){habitGrid.innerHTML=habits.map((h,i)=>`<div class="habit ${h[3]?"checked":""}"><div class="icon">${h[0]}</div><h3>${h[1]}</h3><div class="streak">${h[2]}</div><button class="btn ${h[3]?"ghost":"primary"}" data-habit="${i}">${h[3]?"已打卡 ✓":"完成打卡"}</button></div>`).join("")}
+function toastMsg(s){toast.textContent=s;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1800)}
+document.addEventListener("click",e=>{const p=e.target.closest("[data-page]");if(p)showPage(p.dataset.page);if(e.target.dataset.check){let t=tasks.find(x=>x.id==e.target.dataset.check);t.done=!t.done;renderTasks();toastMsg(t.done?"任务已完成":"任务恢复进行中")}if(e.target.dataset.make){toastMsg("已转为制作任务");showPage("tasks")}if(e.target.dataset.publish){toastMsg("已进入待复盘队列")}if(e.target.dataset.memoTask){toastMsg("备忘已转为任务");showPage("tasks")}if(e.target.dataset.memoIdea){ideas.unshift({tag:"新选题",title:memos[e.target.dataset.memoIdea],desc:"来自备忘录，等待补充内容角度。",platform:"待选择"});renderIdeas();toastMsg("备忘已转为选题");showPage("ideas")}if(e.target.dataset.habit!==undefined){let h=habits[e.target.dataset.habit];h[3]=!h[3];renderHabits();toastMsg(h[3]?"打卡成功":"已取消打卡")}if(e.target.closest('[data-action="quick"]'))showPage("memos");if(e.target.closest('[data-action="addTask"]'))toastMsg("演示版：请从备忘录转任务");if(e.target.closest('[data-action="addIdea"]'))showPage("memos")});
+menuBtn.onclick=()=>drawer.classList.add("open");drawer.onclick=e=>{if(e.target===drawer)drawer.classList.remove("open")};
+saveMemo.onclick=()=>{let v=memoInput.value.trim();if(!v)return; memos.unshift(v);localStorage.setItem("mina-memos",JSON.stringify(memos));memoInput.value="";renderMemos();toastMsg("备忘已保存")};
+taskFilters.onclick=e=>{if(!e.target.dataset.filter)return;taskFilters.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===e.target));let f=e.target.dataset.filter;allTasks.innerHTML=tasks.filter(t=>f==="all"||t.project===f).map(taskHtml).join("")};
+renderTasks();renderIdeas();renderMemos();renderHabits();
+</script>
+</body>
+</html>
